@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ owner.first_name }} {{ owner.last_name }}</h1>
+
+<ul class="list-group">
+    <li class="list-group-item"><strong>Email:</strong> {{ owner.email }}</li>
+    <li class="list-group-item"><strong>Balance:</strong> {{ owner.balance }}</li>
+</ul>
+
+{% endblock %}
+{% block action_panel %}
+  <a href="{% url 'clinic:owner-update' owner.pk %}" class="btn btn-warning mt-2">Edit</a>
+  <a href="{% url 'clinic:owner-delete' owner.pk %}" class="btn btn-danger mt-2">Delete</a>
+  <a href="{% url 'clinic:owner-list' %}" class="btn btn-secondary mt-2">Back</a>
+{% endblock %}

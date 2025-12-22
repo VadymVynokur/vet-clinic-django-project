@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block action_panel %}
+<div class="d-grid gap-2">
+    <a href="{% url 'clinic:appointment-update' appointment.pk %}" class="btn btn-warning">Edit</a>
+    <a href="{% url 'clinic:appointment-delete' appointment.pk %}" class="btn btn-danger">Delete</a>
+    <a href="{% url 'clinic:appointment-list' %}" class="btn btn-secondary">Back</a>
+</div>
+{% endblock %}
+
+
+{% block content %}
+<h1>Appointment Details</h1>
+
+<ul class="list-group">
+    <li class="list-group-item"><strong>Time:</strong> {{ appointment.appointment_time }}</li>
+    <li class="list-group-item"><strong>Veterinarian:</strong> {{ appointment.veterinarian.username }}</li>
+    <li class="list-group-item"><strong>Pet:</strong> {{ appointment.pet.name }}</li>
+    <li class="list-group-item"><strong>Service:</strong> {{ appointment.service.service_type }}</li>
+</ul>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ pet.name }}</h1>
+
+<ul class="list-group">
+    <li class="list-group-item"><strong>Species:</strong> {{ pet.species }}</li>
+    <li class="list-group-item"><strong>Sex:</strong> {{ pet.sex }}</li>
+    <li class="list-group-item"><strong>Breed:</strong> {{ pet.breed }}</li>
+    <li class="list-group-item"><strong>Extra Info:</strong> {{ pet.notes }}</li>
+    <li class="list-group-item"><strong>Owner:</strong> {{ pet.owner.first_name }} {{ pet.owner.last_name }}</li>
+</ul>
+
+
+{% endblock %}
+{% block action_panel %}
+  <a href="{% url 'clinic:pet-update' pet.pk %}" class="btn btn-warning mt-2">Edit</a>
+  <a href="{% url 'clinic:pet-delete' pet.pk %}" class="btn btn-danger mt-2">Delete</a>
+  <a href="{% url 'clinic:pet-list' %}" class="btn btn-secondary mt-2">Back</a>
+{% endblock %}

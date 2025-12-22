@@ -1,0 +1,34 @@
+<div class="card mb-4">
+    <div class="card-header">
+        <strong>Upcoming appointments</strong>
+    </div>
+
+    <div class="card-body p-0">
+        <table class="table table-striped mb-0">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Pet</th>
+                    <th>Owner</th>
+                    <th>Service</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for appointment in upcoming_appointments %}
+                <tr>
+                    <td>{{ appointment.appointment_time|date:"Y-m-d H:i" }}</td>
+                    <td>{{ appointment.pet }}</td>
+                    <td>{{ appointment.owner }}</td>
+                    <td>{{ appointment.service }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="4" class="text-center text-muted">
+                        No upcoming appointments
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+<div class="card mb-4">
+    <div class="card-header">
+        <strong>Quick create</strong>
+    </div>
+
+    <div class="card-body">
+        <div class="d-grid gap-2">
+            <a href="{% url 'clinic:owner-create' %}?next={{ request.path }}"
+   class="btn btn-outline-primary btn-block mb-2">
+    + New Owner
+</a>
+
+<a href="{% url 'clinic:pet-create' %}?next={{ request.path }}"
+   class="btn btn-outline-primary btn-block mb-2">
+    + New Pet
+</a>
+
+<a href="{% url 'clinic:appointment-create' %}?next={{ request.path }}"
+   class="btn btn-outline-primary btn-block mb-2">
+    + New Appointment
+</a>
+
+        </div>
+    </div>
+</div>
