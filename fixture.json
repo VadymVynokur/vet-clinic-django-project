@@ -24,6 +24,11 @@
     "pk": 5,
     "fields": {"username": "emma.jones","password":"pbkdf2_sha256$260000$examplehash","email":"emma.jones@clinic.com"}
   },
+  {
+    "model": "clinic.veterinarian",
+    "pk": 6,
+    "fields": {"username": "admin","password":"pbkdf2_sha256$1200000$Sc0EzQWGAP74gQN53fjMfY$SUlm+yMM1QVUW+RX0DnSR1RyYHfq8I1I4GH3c0AOAyo="}
+  },
 
   {
     "model": "clinic.service",
