@@ -58,14 +58,23 @@ class PetSearchForm(forms.Form):
     name = forms.CharField(
         required=False,
         label='Pet name',
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Search by pet name'})
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Search by pet name'
+            }
+        )
     )
     owner = forms.ModelChoiceField(
-        queryset=Owner.objects.all(),
+        queryset=Owner.objects.none(),
         required=False,
         label='Owner',
         widget=forms.Select(attrs={'class': 'form-control'})
     )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['owner'].queryset = Owner.objects.all()
 
 
 class AppointmentForm(forms.ModelForm):
