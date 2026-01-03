@@ -5,7 +5,7 @@ app_name = "clinic"
 
 urlpatterns = [
     path("", views.DashboardView.as_view(), name="dashboard"),
-
+    path("register/", views.VeterinarianRegisterView.as_view(), name="register"),
     # SERVICES ROUTING
     path('services/', views.ServiceListView.as_view(), name='service-list'),
     path('services/create/', views.ServiceCreateView.as_view(), name='service-create'),
