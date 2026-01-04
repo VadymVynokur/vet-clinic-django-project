@@ -1,3 +1,5 @@
+from abc import abstractmethod, ABC
+
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy, reverse
@@ -11,6 +13,31 @@ from clinic.models import Service, Owner, Pet, Appointment
 
 
 # Create your views here.
+class BaseSearchListView(LoginRequiredMixin, generic.ListView, ABC):
+    search_form_class = None
+
+    def get_search_form(self):
+        return self.search_form_class(self.request.GET)
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        form = self.get_search_form()
+
+        if form.is_valid():
+            queryset = self.filter_queryset(queryset, form)
+
+        return queryset
+
+    @abstractmethod
+    def filter_queryset(self, queryset, form):
+        pass
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["search_form"] = self.get_search_form()
+        return context
+
+
 class DashboardView(LoginRequiredMixin, TemplateView):
     template_name = "clinic/dashboard.html"
 
@@ -36,26 +63,17 @@ class DashboardView(LoginRequiredMixin, TemplateView):
 
         return context
 
-class ServiceListView(LoginRequiredMixin, generic.ListView):
+class ServiceListView(BaseSearchListView):
     model = Service
-    template_name = 'clinic/service_list.html'
-    context_object_name = 'service_list'
+    template_name = "clinic/service_list.html"
+    context_object_name = "service_list"
     paginate_by = 5
+    search_form_class = ServiceSearchForm
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        name = self.request.GET.get('service_type', '')
-        context['search_form'] = ServiceSearchForm(initial={'service_type': name})
-        context['create_url'] = reverse_lazy('clinic:service-create')
-        return context
-
-    def get_queryset(self):
-        queryset = Service.objects.all()
-        form = ServiceSearchForm(self.request.GET)
-        if form.is_valid():
-            service_type = form.cleaned_data.get('service_type')
-            if service_type:
-                queryset = queryset.filter(service_type__icontains=service_type)
+    def filter_queryset(self, queryset, form):
+        service_type = form.cleaned_data.get("service_type")
+        if service_type:
+            queryset = queryset.filter(service_type__icontains=service_type)
         return queryset
 
 
@@ -85,27 +103,19 @@ class ServiceDeleteView(LoginRequiredMixin, generic.DeleteView):
     success_url = reverse_lazy('clinic:service-list')
 
 
-class OwnerListView(LoginRequiredMixin, generic.ListView):
+class OwnerListView(BaseSearchListView):
     model = Owner
-    template_name = 'clinic/owner_list.html'
-    context_object_name = 'owner_list'
+    template_name = "clinic/owner_list.html"
+    context_object_name = "owner_list"
     paginate_by = 5
+    search_form_class = OwnerSearchForm
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        email = self.request.GET.get('email', '')
-        context['search_form'] = OwnerSearchForm(initial={'email': email})
-        context['create_url'] = reverse_lazy('clinic:owner-create')
-        return context
-
-    def get_queryset(self):
-        queryset = Owner.objects.all()
-        form = OwnerSearchForm(self.request.GET)
-        if form.is_valid():
-            email = form.cleaned_data.get('email')
-            if email:
-                queryset = queryset.filter(email__icontains=email)
+    def filter_queryset(self, queryset, form):
+        email = form.cleaned_data.get("email")
+        if email:
+            queryset = queryset.filter(email__icontains=email)
         return queryset
+
 
 
 class OwnerDetailView(LoginRequiredMixin, generic.DetailView):
@@ -136,31 +146,32 @@ class OwnerDeleteView(LoginRequiredMixin, generic.DeleteView):
     success_url = reverse_lazy('clinic:owner-list')
 
 
-class PetListView(LoginRequiredMixin, generic.ListView):
+class PetListView(BaseSearchListView):
     model = Pet
-    template_name = 'clinic/pet_list.html'
-    context_object_name = 'pet_list'
+    template_name = "clinic/pet_list.html"
+    context_object_name = "pet_list"
     paginate_by = 5
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        name = self.request.GET.get('name', '')
-        owner_id = self.request.GET.get('owner', None)
-        context['search_form'] = PetSearchForm(initial={'name': name, 'owner': owner_id})
-        context['create_url'] = reverse_lazy('clinic:pet-create')
-        return context
+    search_form_class = PetSearchForm
 
     def get_queryset(self):
-        queryset = Pet.objects.select_related('owner').all()
-        form = PetSearchForm(self.request.GET)
-        if form.is_valid():
-            name = form.cleaned_data.get('name')
-            owner = form.cleaned_data.get('owner')
-            if name:
-                queryset = queryset.filter(name__icontains=name)
-            if owner:
-                queryset = queryset.filter(owner=owner)
+        return (
+            super()
+            .get_queryset()
+            .select_related("owner")
+            .prefetch_related("appointments")
+        )
+
+    def filter_queryset(self, queryset, form):
+        name = form.cleaned_data.get("name")
+        owner = form.cleaned_data.get("owner")
+
+        if name:
+            queryset = queryset.filter(name__icontains=name)
+        if owner:
+            queryset = queryset.filter(owner=owner)
+
         return queryset
+
 
 
 class PetDetailView(LoginRequiredMixin, generic.DetailView):
@@ -191,26 +202,25 @@ class PetDeleteView(LoginRequiredMixin, generic.DeleteView):
     success_url = reverse_lazy('clinic:pet-list')
 
 
-class AppointmentListView(LoginRequiredMixin, generic.ListView):
+class AppointmentListView(BaseSearchListView):
     model = Appointment
-    template_name = 'clinic/appointment_list.html'
-    context_object_name = 'appointment_list'
+    template_name = "clinic/appointment_list.html"
+    context_object_name = "appointment_list"
     paginate_by = 5
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        date = self.request.GET.get('date', '')
-        context['search_form'] = AppointmentSearchForm(initial={'date': date})
-        context['create_url'] = reverse_lazy('clinic:appointment-create')
-        return context
+    search_form_class = AppointmentSearchForm
 
     def get_queryset(self):
-        queryset = Appointment.objects.select_related('veterinarian', 'pet', 'service').all()
-        form = AppointmentSearchForm(self.request.GET)
-        if form.is_valid():
-            date = form.cleaned_data.get('date')
-            if date:
-                queryset = queryset.filter(appointment_time__date=date)
+        return (
+            super()
+            .get_queryset()
+            .select_related("veterinarian", "pet", "service")
+            .prefetch_related("pet__owner")
+        )
+
+    def filter_queryset(self, queryset, form):
+        date = form.cleaned_data.get("date")
+        if date:
+            queryset = queryset.filter(appointment_time__date=date)
         return queryset
 
 
