@@ -1,9 +1,6 @@
 from django.contrib.auth import get_user_model
-from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-class Veterinarian(AbstractUser):
-    pass
 
 class Owner(models.Model):
     first_name = models.CharField(max_length=100)
@@ -50,4 +47,3 @@ class Appointment(models.Model):
 
     def __str__(self):
         return f"{self.pet} - {self.service} at {self.appointment_time} with {self.veterinarian}"
-

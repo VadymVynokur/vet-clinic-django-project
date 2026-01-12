@@ -1,18 +1,24 @@
 from abc import abstractmethod, ABC
 
-from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy, reverse
 from django.utils.timezone import now
 from django.views import generic
 from django.views.generic import TemplateView
 
-from clinic.forms import OwnerSearchForm, OwnerForm, ServiceSearchForm, ServiceForm, PetSearchForm, PetForm, \
-    AppointmentSearchForm, AppointmentForm, VeterinarianCreationForm
+from clinic.forms import (
+    OwnerSearchForm,
+    OwnerForm,
+    ServiceSearchForm,
+    ServiceForm,
+    PetSearchForm,
+    PetForm,
+    AppointmentSearchForm,
+    AppointmentForm,
+)
 from clinic.models import Service, Owner, Pet, Appointment
 
 
-# Create your views here.
 class BaseSearchListView(LoginRequiredMixin, generic.ListView, ABC):
     search_form_class = None
 
@@ -250,11 +256,3 @@ class AppointmentDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Appointment
     template_name = 'clinic/appointment_confirm_delete.html'
     success_url = reverse_lazy('clinic:appointment-list')
-
-
-
-class VeterinarianRegisterView(generic.CreateView):
-    model = get_user_model()
-    form_class = VeterinarianCreationForm
-    template_name = "registration/register.html"
-    success_url = reverse_lazy("login")

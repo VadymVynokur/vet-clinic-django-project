@@ -1,6 +1,4 @@
 from django import forms
-from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import UserCreationForm
 
 from .models import Owner, Service, Pet, Appointment
 
@@ -94,9 +92,3 @@ class AppointmentSearchForm(forms.Form):
         label='Appointment date',
         widget=forms.DateInput(attrs={'class': 'form-control', 'type': 'date'})
     )
-
-
-class VeterinarianCreationForm(UserCreationForm):
-    class Meta(UserCreationForm.Meta):
-        model = get_user_model()
-        fields = ("username", "first_name", "last_name", "email")
