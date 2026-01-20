@@ -2,9 +2,43 @@
 
 {% block action_panel %}
 <div class="d-grid gap-2">
-    <a href="{% url 'clinic:appointment-update' appointment.pk %}" class="btn btn-warning">Edit</a>
-    <a href="{% url 'clinic:appointment-delete' appointment.pk %}" class="btn btn-danger">Delete</a>
-    <a href="{% url 'clinic:appointment-list' %}" class="btn btn-secondary">Back</a>
+
+    <div>
+        <a href="{% url 'clinic:appointment-update' appointment.pk %}"
+           class="btn btn-warning w-100">
+            Edit
+        </a>
+    </div>
+
+    <div>
+        {% if not appointment.is_completed %}
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-success w-100">
+                    Complete appointment
+                </button>
+            </form>
+        {% else %}
+            <span class="btn btn-outline-success disabled w-100">
+                Completed
+            </span>
+        {% endif %}
+    </div>
+
+    <div>
+        <a href="{% url 'clinic:appointment-delete' appointment.pk %}"
+           class="btn btn-danger w-100">
+            Delete
+        </a>
+    </div>
+
+    <div>
+        <a href="{% url 'clinic:appointment-list' %}"
+           class="btn btn-secondary w-100">
+            Back
+        </a>
+    </div>
+
 </div>
 {% endblock %}
 
@@ -17,5 +51,16 @@
     <li class="list-group-item"><strong>Veterinarian:</strong> {{ appointment.veterinarian.username }}</li>
     <li class="list-group-item"><strong>Pet:</strong> {{ appointment.pet.name }}</li>
     <li class="list-group-item"><strong>Service:</strong> {{ appointment.service.service_type }}</li>
+    <li class="list-group-item">
+        <strong>Status:</strong>
+        {% if appointment.is_completed %}
+            <span class="text-success">Completed</span>
+            {% if appointment.completed_at %}
+                ({{ appointment.completed_at }})
+            {% endif %}
+        {% else %}
+            <span class="text-warning">Scheduled</span>
+        {% endif %}
+    </li>
 </ul>
 {% endblock %}

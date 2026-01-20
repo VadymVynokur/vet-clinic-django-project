@@ -23,6 +23,16 @@
             <td>
                 <a href="{% url 'clinic:appointment-detail' appointment.pk %}" class="btn btn-info btn-sm">View</a>
                 <a href="{% url 'clinic:appointment-update' appointment.pk %}" class="btn btn-warning btn-sm">Edit</a>
+                {% if not appointment.is_completed %}
+                    <form method="post" action="{% url 'clinic:appointment-detail' appointment.pk %}" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-success btn-sm">
+                            Complete
+                        </button>
+                    </form>
+                {% else %}
+                    <span class="btn btn-outline-success btn-sm disabled">Completed</span>
+                {% endif %}
                 <a href="{% url 'clinic:appointment-delete' appointment.pk %}" class="btn btn-danger btn-sm">Delete</a>
             </td>
         </tr>

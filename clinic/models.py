@@ -1,5 +1,9 @@
+from datetime import timedelta
+
 from django.contrib.auth import get_user_model
-from django.db import models
+from django.core.exceptions import ValidationError
+from django.db import models, transaction
+from django.utils import timezone
 
 
 class Owner(models.Model):
@@ -44,6 +48,54 @@ class Appointment(models.Model):
     service = models.ForeignKey(Service, on_delete=models.CASCADE, related_name="appointments")
     created_at = models.DateTimeField(auto_now_add=True)
     appointment_time = models.DateTimeField()
+
+    is_completed = models.BooleanField(default=False)
+    completed_at = models.DateTimeField(null=True, blank=True)
+
+    def complete(self):
+        if self.is_completed:
+            raise ValidationError("Appointment is already completed.")
+
+        owner = self.pet.owner
+        price = self.service.price
+
+        with transaction.atomic():
+            owner.balance -= price
+            owner.save(update_fields=["balance"])
+
+            self.is_completed = True
+            self.completed_at = timezone.now()
+            self.save(update_fields=["is_completed", "completed_at"])
+
+    def clean(self):
+        if self.appointment_time < timezone.now():
+            raise ValidationError({
+                "appointment_time": "You cannot schedule an appointment in the past."
+            })
+
+        start = self.appointment_time - timedelta(hours=1)
+        end = self.appointment_time + timedelta(hours=1)
+
+        qs = Appointment.objects.filter(
+            veterinarian=self.veterinarian,
+            appointment_time__gte=start,
+            appointment_time__lte=end,
+        )
+
+        if self.pk:
+            qs = qs.exclude(pk=self.pk)
+
+        if qs.exists():
+            raise ValidationError({
+                "appointment_time": (
+                    "This veterinarian already has an appointment "
+                    "within 1 hour of the selected time."
+                )
+            })
+
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.pet} - {self.service} at {self.appointment_time} with {self.veterinarian}"

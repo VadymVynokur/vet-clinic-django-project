@@ -1,6 +1,9 @@
 from abc import abstractmethod, ABC
 
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import ValidationError
+from django.shortcuts import redirect
 from django.urls import reverse_lazy, reverse
 from django.utils.timezone import now
 from django.views import generic
@@ -235,6 +238,17 @@ class AppointmentDetailView(LoginRequiredMixin, generic.DetailView):
     template_name = 'clinic/appointment_detail.html'
     context_object_name = 'appointment'
 
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+
+        if not self.object.is_completed:
+            try:
+                self.object.complete()
+                messages.success(request, "Appointment successfully completed.")
+            except ValidationError as e:
+                messages.error(request, e.message)
+
+        return redirect("clinic:appointment-detail", pk=self.object.pk)
 
 class AppointmentCreateView(LoginRequiredMixin, generic.CreateView):
     model = Appointment
