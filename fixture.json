@@ -1,281 +1,146 @@
 [
   {
-    "model": "clinic.veterinarian",
+    "model": "accounts.veterinarian",
     "pk": 1,
-    "fields": {"username": "alice.smith","password":"pbkdf2_sha256$260000$examplehash","email":"alice.smith@clinic.com"}
+    "fields": {
+      "username": "alice.smith",
+      "password": "pbkdf2_sha256$260000$examplehash",
+      "email": "alice.smith@clinic.com",
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false
+    }
   },
   {
-    "model": "clinic.veterinarian",
+    "model": "accounts.veterinarian",
     "pk": 2,
-    "fields": {"username": "bob.johnson","password":"pbkdf2_sha256$260000$examplehash","email":"bob.johnson@clinic.com"}
+    "fields": {
+      "username": "bob.johnson",
+      "password": "pbkdf2_sha256$260000$examplehash",
+      "email": "bob.johnson@clinic.com",
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false
+    }
   },
   {
-    "model": "clinic.veterinarian",
+    "model": "accounts.veterinarian",
     "pk": 3,
-    "fields": {"username": "carol.williams","password":"pbkdf2_sha256$260000$examplehash","email":"carol.williams@clinic.com"}
+    "fields": {
+      "username": "carol.williams",
+      "password": "pbkdf2_sha256$260000$examplehash",
+      "email": "carol.williams@clinic.com",
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false
+    }
   },
   {
-    "model": "clinic.veterinarian",
+    "model": "accounts.veterinarian",
     "pk": 4,
-    "fields": {"username": "david.brown","password":"pbkdf2_sha256$260000$examplehash","email":"david.brown@clinic.com"}
+    "fields": {
+      "username": "david.brown",
+      "password": "pbkdf2_sha256$260000$examplehash",
+      "email": "david.brown@clinic.com",
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false
+    }
   },
   {
-    "model": "clinic.veterinarian",
+    "model": "accounts.veterinarian",
     "pk": 5,
-    "fields": {"username": "emma.jones","password":"pbkdf2_sha256$260000$examplehash","email":"emma.jones@clinic.com"}
+    "fields": {
+      "username": "emma.jones",
+      "password": "pbkdf2_sha256$260000$examplehash",
+      "email": "emma.jones@clinic.com",
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false
+    }
   },
   {
-    "model": "clinic.veterinarian",
+    "model": "accounts.veterinarian",
     "pk": 6,
-    "fields": {"username": "admin","password":"pbkdf2_sha256$1200000$Sc0EzQWGAP74gQN53fjMfY$SUlm+yMM1QVUW+RX0DnSR1RyYHfq8I1I4GH3c0AOAyo="}
+    "fields": {
+      "username": "admin",
+      "password": "pbkdf2_sha256$1200000$Sc0EzQWGAP74gQN53fjMfY$SUlm+yMM1QVUW+RX0DnSR1RyYHfq8I1I4GH3c0AOAyo=",
+      "email": "admin@clinic.com",
+      "is_active": true,
+      "is_staff": true,
+      "is_superuser": true
+    }
   },
 
   {
     "model": "clinic.service",
     "pk": 1,
-    "fields": {"service_type": "General Checkup", "price": 50.00}
+    "fields": { "service_type": "General Checkup", "price": "50.00" }
   },
   {
     "model": "clinic.service",
     "pk": 2,
-    "fields": {"service_type": "Vaccination", "price": 40.00}
+    "fields": { "service_type": "Vaccination", "price": "40.00" }
   },
   {
     "model": "clinic.service",
     "pk": 3,
-    "fields": {"service_type": "Dental Cleaning", "price": 120.00}
+    "fields": { "service_type": "Dental Cleaning", "price": "120.00" }
   },
   {
     "model": "clinic.service",
     "pk": 4,
-    "fields": {"service_type": "X-ray", "price": 80.00}
+    "fields": { "service_type": "X-ray", "price": "80.00" }
   },
   {
     "model": "clinic.service",
     "pk": 5,
-    "fields": {"service_type": "Surgery Consultation", "price": 100.00}
-  },
-  {
-    "model": "clinic.service",
-    "pk": 6,
-    "fields": {"service_type": "Grooming", "price": 60.00}
-  },
-  {
-    "model": "clinic.service",
-    "pk": 7,
-    "fields": {"service_type": "Lab Tests", "price": 70.00}
-  },
-  {
-    "model": "clinic.service",
-    "pk": 8,
-    "fields": {"service_type": "Microchip Implant", "price": 35.00}
-  },
-  {
-    "model": "clinic.service",
-    "pk": 9,
-    "fields": {"service_type": "Parasite Treatment", "price": 45.00}
-  },
-  {
-    "model": "clinic.service",
-    "pk": 10,
-    "fields": {"service_type": "Emergency Visit", "price": 150.00}
+    "fields": { "service_type": "Surgery Consultation", "price": "100.00" }
   },
 
   {
     "model": "clinic.owner",
     "pk": 1,
-    "fields": {"first_name": "John", "last_name": "Doe", "email": "john.doe@example.com", "balance": 0}
+    "fields": {
+      "first_name": "John",
+      "last_name": "Doe",
+      "email": "john.doe@example.com",
+      "balance": "0.00"
+    }
   },
   {
     "model": "clinic.owner",
     "pk": 2,
-    "fields": {"first_name": "Mary", "last_name": "Smith", "email": "mary.smith@example.com", "balance": 50}
-  },
-  {
-    "model": "clinic.owner",
-    "pk": 3,
-    "fields": {"first_name": "James", "last_name": "Johnson", "email": "james.johnson@example.com", "balance": -20}
-  },
-  {
-    "model": "clinic.owner",
-    "pk": 4,
-    "fields": {"first_name": "Patricia", "last_name": "Williams", "email": "patricia.williams@example.com", "balance": 100}
-  },
-  {
-    "model": "clinic.owner",
-    "pk": 5,
-    "fields": {"first_name": "Robert", "last_name": "Brown", "email": "robert.brown@example.com", "balance": -15}
-  },
-  {
-    "model": "clinic.owner",
-    "pk": 6,
-    "fields": {"first_name": "Linda", "last_name": "Jones", "email": "linda.jones@example.com", "balance": 20}
-  },
-  {
-    "model": "clinic.owner",
-    "pk": 7,
-    "fields": {"first_name": "Michael", "last_name": "Garcia", "email": "michael.garcia@example.com", "balance": 0}
-  },
-  {
-    "model": "clinic.owner",
-    "pk": 8,
-    "fields": {"first_name": "Elizabeth", "last_name": "Miller", "email": "elizabeth.miller@example.com", "balance": -5}
-  },
-  {
-    "model": "clinic.owner",
-    "pk": 9,
-    "fields": {"first_name": "William", "last_name": "Davis", "email": "william.davis@example.com", "balance": 60}
-  },
-  {
-    "model": "clinic.owner",
-    "pk": 10,
-    "fields": {"first_name": "Barbara", "last_name": "Martinez", "email": "barbara.martinez@example.com", "balance": -30}
-  },
-  {
-    "model": "clinic.owner",
-    "pk": 11,
-    "fields": {"first_name": "Richard", "last_name": "Hernandez", "email": "richard.hernandez@example.com", "balance": 10}
-  },
-  {
-    "model": "clinic.owner",
-    "pk": 12,
-    "fields": {"first_name": "Susan", "last_name": "Lopez", "email": "susan.lopez@example.com", "balance": 0}
-  },
-  {
-    "model": "clinic.owner",
-    "pk": 13,
-    "fields": {"first_name": "Joseph", "last_name": "Gonzalez", "email": "joseph.gonzalez@example.com", "balance": 25}
-  },
-  {
-    "model": "clinic.owner",
-    "pk": 14,
-    "fields": {"first_name": "Jessica", "last_name": "Wilson", "email": "jessica.wilson@example.com", "balance": -10}
-  },
-  {
-    "model": "clinic.owner",
-    "pk": 15,
-    "fields": {"first_name": "Charles", "last_name": "Anderson", "email": "charles.anderson@example.com", "balance": 15}
-  },
-  {
-    "model": "clinic.owner",
-    "pk": 16,
-    "fields": {"first_name": "Sarah", "last_name": "Thomas", "email": "sarah.thomas@example.com", "balance": 0}
-  },
-  {
-    "model": "clinic.owner",
-    "pk": 17,
-    "fields": {"first_name": "Daniel", "last_name": "Taylor", "email": "daniel.taylor@example.com", "balance": 5}
+    "fields": {
+      "first_name": "Mary",
+      "last_name": "Smith",
+      "email": "mary.smith@example.com",
+      "balance": "50.00"
+    }
   },
 
   {
     "model": "clinic.pet",
     "pk": 1,
-    "fields": {"name": "Buddy","species":"Dog","sex":"M","breed":"Golden Retriever","notes":"Friendly","owner":1}
+    "fields": {
+      "name": "Buddy",
+      "species": "Dog",
+      "sex": "M",
+      "breed": "Golden Retriever",
+      "notes": "Friendly",
+      "owner": 1
+    }
   },
   {
     "model": "clinic.pet",
     "pk": 2,
-    "fields": {"name": "Mittens","species":"Cat","sex":"F","breed":"Siamese","notes":"Shy","owner":2}
-  },
-  {
-    "model": "clinic.pet",
-    "pk": 3,
-    "fields": {"name": "Charlie","species":"Dog","sex":"M","breed":"Beagle","notes":"Playful","owner":3}
-  },
-  {
-    "model": "clinic.pet",
-    "pk": 4,
-    "fields": {"name": "Lola","species":"Cat","sex":"F","breed":"Persian","notes":"Lazy","owner":4}
-  },
-  {
-    "model": "clinic.pet",
-    "pk": 5,
-    "fields": {"name": "Max","species":"Dog","sex":"M","breed":"Bulldog","notes":"Calm","owner":5}
-  },
-  {
-    "model": "clinic.pet",
-    "pk": 6,
-    "fields": {"name": "Bella","species":"Dog","sex":"F","breed":"Poodle","notes":"Energetic","owner":6}
-  },
-  {
-    "model": "clinic.pet",
-    "pk": 7,
-    "fields": {"name": "Oscar","species":"Cat","sex":"M","breed":"Maine Coon","notes":"Curious","owner":7}
-  },
-  {
-    "model": "clinic.pet",
-    "pk": 8,
-    "fields": {"name": "Lucy","species":"Rabbit","sex":"F","breed":"Dutch","notes":"Quiet","owner":8}
-  },
-  {
-    "model": "clinic.pet",
-    "pk": 9,
-    "fields": {"name": "Rocky","species":"Dog","sex":"M","breed":"Boxer","notes":"Strong","owner":9}
-  },
-  {
-    "model": "clinic.pet",
-    "pk": 10,
-    "fields": {"name": "Luna","species":"Cat","sex":"F","breed":"Bengal","notes":"Active","owner":10}
-  },
-  {
-    "model": "clinic.pet",
-    "pk": 11,
-    "fields": {"name": "Daisy","species":"Dog","sex":"F","breed":"Cocker Spaniel","notes":"Gentle","owner":11}
-  },
-  {
-    "model": "clinic.pet",
-    "pk": 12,
-    "fields": {"name": "Toby","species":"Dog","sex":"M","breed":"Dalmatian","notes":"Friendly","owner":12}
-  },
-  {
-    "model": "clinic.pet",
-    "pk": 13,
-    "fields": {"name": "Coco","species":"Cat","sex":"F","breed":"Sphynx","notes":"Playful","owner":13}
-  },
-  {
-    "model": "clinic.pet",
-    "pk": 14,
-    "fields": {"name": "Simba","species":"Cat","sex":"M","breed":"Russian Blue","notes":"Curious","owner":14}
-  },
-  {
-    "model": "clinic.pet",
-    "pk": 15,
-    "fields": {"name": "Milo","species":"Dog","sex":"M","breed":"Shih Tzu","notes":"Friendly","owner":15}
-  },
-  {
-    "model": "clinic.pet",
-    "pk": 16,
-    "fields": {"name": "Nala","species":"Cat","sex":"F","breed":"Siberian","notes":"Sweet","owner":16}
-  },
-  {
-    "model": "clinic.pet",
-    "pk": 17,
-    "fields": {"name": "Bailey","species":"Dog","sex":"M","breed":"Doberman","notes":"Alert","owner":17}
-  },
-  {
-    "model": "clinic.pet",
-    "pk": 18,
-    "fields": {"name": "Ginger","species":"Rabbit","sex":"F","breed":"Lionhead","notes":"Calm","owner":1}
-  },
-  {
-    "model": "clinic.pet",
-    "pk": 19,
-    "fields": {"name": "Shadow","species":"Cat","sex":"M","breed":"Burmese","notes":"Shy","owner":2}
-  },
-  {
-    "model": "clinic.pet",
-    "pk": 20,
-    "fields": {"name": "Rusty","species":"Dog","sex":"M","breed":"Chihuahua","notes":"Energetic","owner":3}
-  },
-  {
-    "model": "clinic.pet",
-    "pk": 21,
-    "fields": {"name": "Pumpkin","species":"Cat","sex":"F","breed":"Ragdoll","notes":"Friendly","owner":4}
-  },
-  {
-    "model": "clinic.pet",
-    "pk": 22,
-    "fields": {"name": "Peanut","species":"Hamster","sex":"M","breed":"Syrian","notes":"Small","owner":5}
+    "fields": {
+      "name": "Mittens",
+      "species": "Cat",
+      "sex": "F",
+      "breed": "Siamese",
+      "notes": "Shy",
+      "owner": 2
+    }
   }
-
 ]

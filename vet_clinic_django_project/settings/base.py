@@ -99,7 +99,7 @@ USE_TZ = True
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
-AUTH_USER_MODEL = "clinic.Veterinarian"
+AUTH_USER_MODEL = "accounts.Veterinarian"
 
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/accounts/login/"

@@ -181,6 +181,7 @@ cython_debug/
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
 .idea/**/shelf
+.idea
 
 # AWS User-specific
 .idea/**/aws.xml
@@ -375,5 +376,6 @@ poetry.toml
 
 # LSP config files
 pyrightconfig.json
+.js
 
 # End of https://www.toptal.com/developers/gitignore/api/python,pycharm,django
