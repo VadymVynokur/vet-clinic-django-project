@@ -1,0 +1,25 @@
+<div class="card">
+    <div class="card-header">
+        <strong>Owners with negative balance</strong>
+    </div>
+
+    <ul class="list-group list-group-flush">
+        {% for owner in owners_with_debt %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span>
+                    <a href="{% url 'clinic:owner-detail' owner.pk %}"
+                       class="text-decoration-none">
+                        {{ owner.first_name }} {{ owner.last_name }}
+                    </a>
+                </span>
+                <span class="text-danger font-weight-bold">
+                    {{ owner.balance }}
+                </span>
+            </li>
+        {% empty %}
+            <li class="list-group-item text-muted">
+                No owners with debt 🎉
+            </li>
+        {% endfor %}
+    </ul>
+</div>

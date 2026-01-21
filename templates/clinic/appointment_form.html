@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ view.object.pk|yesno:"Update Appointment,Create Appointment" }}</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+<button type="submit" class="btn btn-success">Save</button>
+    <a href="{{ request.GET.next|default:request.META.HTTP_REFERER }}"
+           class="btn btn-secondary">
+            Cancel
+        </a>
+</form>
+{% endblock %}

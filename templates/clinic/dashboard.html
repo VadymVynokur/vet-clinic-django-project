@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container-fluid">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="mb-0">Dashboard</h1>
+    </div>
+
+    {% include "clinic/dashboard/_upcoming_appointments.html" %}
+
+</div>
+{% endblock %}
+
+{% block action_panel %}
+    {% include "clinic/dashboard/_quick_create.html" %}
+    {% include "clinic/dashboard/_negative_balances.html" %}
+{% endblock %}

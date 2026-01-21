@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ service.service_type }}</h1>
+
+<ul class="list-group">
+    <li class="list-group-item"><strong>Service:</strong> {{ service.service_type }}</li>
+    <li class="list-group-item"><strong>Price:</strong> {{ service.price }}</li>
+</ul>
+
+
+{% endblock %}
+{% block action_panel %}
+  <a href="{% url 'clinic:service-update' service.pk %}" class="btn btn-warning mt-2">Edit</a>
+  <a href="{% url 'clinic:service-delete' service.pk %}" class="btn btn-danger mt-2">Delete</a>
+  <a href="{% url 'clinic:service-list' %}" class="btn btn-secondary mt-2">Back</a>
+{% endblock %}

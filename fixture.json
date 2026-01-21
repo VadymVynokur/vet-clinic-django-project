@@ -1,0 +1,146 @@
+[
+  {
+    "model": "accounts.veterinarian",
+    "pk": 1,
+    "fields": {
+      "username": "alice.smith",
+      "password": "pbkdf2_sha256$260000$examplehash",
+      "email": "alice.smith@clinic.com",
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false
+    }
+  },
+  {
+    "model": "accounts.veterinarian",
+    "pk": 2,
+    "fields": {
+      "username": "bob.johnson",
+      "password": "pbkdf2_sha256$260000$examplehash",
+      "email": "bob.johnson@clinic.com",
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false
+    }
+  },
+  {
+    "model": "accounts.veterinarian",
+    "pk": 3,
+    "fields": {
+      "username": "carol.williams",
+      "password": "pbkdf2_sha256$260000$examplehash",
+      "email": "carol.williams@clinic.com",
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false
+    }
+  },
+  {
+    "model": "accounts.veterinarian",
+    "pk": 4,
+    "fields": {
+      "username": "david.brown",
+      "password": "pbkdf2_sha256$260000$examplehash",
+      "email": "david.brown@clinic.com",
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false
+    }
+  },
+  {
+    "model": "accounts.veterinarian",
+    "pk": 5,
+    "fields": {
+      "username": "emma.jones",
+      "password": "pbkdf2_sha256$260000$examplehash",
+      "email": "emma.jones@clinic.com",
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false
+    }
+  },
+  {
+    "model": "accounts.veterinarian",
+    "pk": 6,
+    "fields": {
+      "username": "admin",
+      "password": "pbkdf2_sha256$1200000$Sc0EzQWGAP74gQN53fjMfY$SUlm+yMM1QVUW+RX0DnSR1RyYHfq8I1I4GH3c0AOAyo=",
+      "email": "admin@clinic.com",
+      "is_active": true,
+      "is_staff": true,
+      "is_superuser": true
+    }
+  },
+
+  {
+    "model": "clinic.service",
+    "pk": 1,
+    "fields": { "service_type": "General Checkup", "price": "50.00" }
+  },
+  {
+    "model": "clinic.service",
+    "pk": 2,
+    "fields": { "service_type": "Vaccination", "price": "40.00" }
+  },
+  {
+    "model": "clinic.service",
+    "pk": 3,
+    "fields": { "service_type": "Dental Cleaning", "price": "120.00" }
+  },
+  {
+    "model": "clinic.service",
+    "pk": 4,
+    "fields": { "service_type": "X-ray", "price": "80.00" }
+  },
+  {
+    "model": "clinic.service",
+    "pk": 5,
+    "fields": { "service_type": "Surgery Consultation", "price": "100.00" }
+  },
+
+  {
+    "model": "clinic.owner",
+    "pk": 1,
+    "fields": {
+      "first_name": "John",
+      "last_name": "Doe",
+      "email": "john.doe@example.com",
+      "balance": "0.00"
+    }
+  },
+  {
+    "model": "clinic.owner",
+    "pk": 2,
+    "fields": {
+      "first_name": "Mary",
+      "last_name": "Smith",
+      "email": "mary.smith@example.com",
+      "balance": "50.00"
+    }
+  },
+
+  {
+    "model": "clinic.pet",
+    "pk": 1,
+    "fields": {
+      "name": "Buddy",
+      "species": "Dog",
+      "sex": "M",
+      "breed": "Golden Retriever",
+      "notes": "Friendly",
+      "owner": 1
+    }
+  },
+  {
+    "model": "clinic.pet",
+    "pk": 2,
+    "fields": {
+      "name": "Mittens",
+      "species": "Cat",
+      "sex": "F",
+      "breed": "Siamese",
+      "notes": "Shy",
+      "owner": 2
+    }
+  }
+]

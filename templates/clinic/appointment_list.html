@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Appointments</h1>
+
+<table class="table table-striped table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th>Time</th>
+            <th>Veterinarian</th>
+            <th>Pet</th>
+            <th>Service</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for appointment in appointment_list %}
+        <tr>
+            <td>{{ appointment.appointment_time }}</td>
+            <td>{{ appointment.veterinarian.username }}</td>
+            <td>{{ appointment.pet.name }}</td>
+            <td>{{ appointment.service.service_type }}</td>
+            <td>
+                <a href="{% url 'clinic:appointment-detail' appointment.pk %}" class="btn btn-info btn-sm">View</a>
+                <a href="{% url 'clinic:appointment-update' appointment.pk %}" class="btn btn-warning btn-sm">Edit</a>
+                {% if not appointment.is_completed %}
+                    <form method="post" action="{% url 'clinic:appointment-detail' appointment.pk %}" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-success btn-sm">
+                            Complete
+                        </button>
+                    </form>
+                {% else %}
+                    <span class="btn btn-outline-success btn-sm disabled">Completed</span>
+                {% endif %}
+                <a href="{% url 'clinic:appointment-delete' appointment.pk %}" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5" class="text-center text-muted">
+                No appointments found
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
+
+{% block action_panel %}
+<div class="d-grid gap-2">
+    <a href="{% url 'clinic:appointment-create' %}" class="btn btn-outline-primary btn-block mb-2">
+        + New appointment
+    </a>
+</div>
+{% endblock %}
